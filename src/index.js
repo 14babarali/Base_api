@@ -1,6 +1,9 @@
 require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
+const userRoutes = require('./routes/userRoutes.js');
+
+
 const bookRoutes = require('./routes/bookRoutes.js'); // Import routes
 const app = express();
 const URI = process.env.MONGODB_URI;
@@ -18,6 +21,7 @@ database.once('connected', () => {
 
 app.use(express.json());
 app.use('/api', bookRoutes); // Use the routes
+app.use('/api/users', userRoutes); // User-related routes
 
 app.get('/', (req, res) => {
     res.send('Welcome to the Books API!');
